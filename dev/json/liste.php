@@ -6,9 +6,8 @@
  * Time: 13:51
  */
 
- public function charger (){
-     $json_source = file_get_contents(/dev/players.json);
-
+function charger () {
+     $json_source = file_get_contents("/dev/players.json");
      return $json_source;
 
 }
