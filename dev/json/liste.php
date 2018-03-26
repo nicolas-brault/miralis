@@ -1,5 +1,5 @@
 <?php
-require ('Test/TestListe.php');
+require ('test/TestListe.php');
 /**
  * Created by PhpStorm.
  * User: c16000805
@@ -61,25 +61,40 @@ function getRole ($json_data, $role) {
 }
 
 function matchmaking() {
+    $json_data_compo = ["DPS", "DPS", "Healer", "Tank"];
     $json_data = charger();
     $json_data_vet = getVet($json_data);
     $json_data_new = getNew($json_data);
     $json_data_equipe = [];
-    //print_r($json_data_new);
 
-    $rand = rand(0,sizeof($json_data_vet)-1);
-    array_push($json_data_equipe,$json_data_vet[$rand]);
-    array_splice($json_data_vet, $rand, 1 );
+    $randRole = rand(0,sizeof($json_data_compo)-1);
+    $json_data_role = getRole($json_data_vet,$json_data_compo[$randRole]);
+    $rand = rand(0,sizeof($json_data_role)-1);
+    array_splice($json_data_role, $rand, 1 );
+    array_push($json_data_equipe,$json_data_role[$rand]);
 
-    $rand = rand(0,sizeof($json_data_vet)-1);
-    array_push($json_data_equipe,$json_data_vet[$rand]);
+    $randRole = rand(0,sizeof($json_data_compo)-1);
+    if ($json_data_compo[$randRole] == "DPS" && $json_data_compo[1] != "DPS")
+        array_push($json_data_equipe,$json_data_role[$rand]);
+    else {
+        $json_data_role = getRole($json_data_vet, $json_data_compo[$randRole]);
+        $rand = rand(0, sizeof($json_data_role) - 1);
+        array_push($json_data_equipe, $json_data_role[$rand]);
+    }
 
-    $rand = rand(0,sizeof($json_data_new)-1);
-    array_push($json_data_equipe, $json_data_new[$rand]);
-    array_splice($json_data_new, $rand, 1);
+    $randRole = rand(0,sizeof($json_data_compo)-1);
+    $json_data_role = getRole($json_data_new,$json_data_compo[$randRole]);
+    $rand = rand(0,sizeof($json_data_role)-1);
+    array_splice($json_data_role, $rand, 1 );
+    array_push($json_data_equipe,$json_data_role[$rand]);
 
-    $rand = rand(0,sizeof($json_data_new)-1);
-    array_push($json_data_equipe, $json_data_new[$rand]);
-
+    $randRole = rand(0,sizeof($json_data_compo)-1);
+    if ($json_data_compo[$randRole] == "DPS" && $json_data_compo[1] != "DPS")
+        array_push($json_data_equipe,$json_data_role[$rand]);
+    else {
+        $json_data_role = getRole($json_data_new, $json_data_compo[$randRole]);
+        $rand = rand(0, sizeof($json_data_role) - 1);
+        array_push($json_data_equipe, $json_data_role[$rand]);
+    }
     return $json_data_equipe;
 }
