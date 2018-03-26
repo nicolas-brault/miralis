@@ -66,18 +66,18 @@ function matchmaking($json_data) {
     $json_data_equipe = [];
 
     $rand = rand(0,sizeof($json_data_vet)-1);
-    $json_data_equipe += $json_data_vet[$rand];
+    array_push($json_data_equipe,$json_data_vet[$rand]);
     array_splice($json_data_vet, $rand, 1 );
 
     $rand = rand(0,sizeof($json_data_vet)-1);
-    $json_data_equipe += $json_data_vet[$rand];
+    array_push($json_data_equipe,$json_data_vet[$rand]);
 
     $rand = rand(0,sizeof($json_data_vet)-1);
-    $json_data_equipe += $json_data_new[$rand];
+    array_push($json_data_equipe, $json_data_new[$rand]);
     array_splice($json_data_new, $rand, 1);
 
     $rand = rand(0,sizeof($json_data_vet)-1);
-    $json_data_equipe += $json_data_new[$rand];
+    array_push($json_data_equipe, $json_data_new[$rand]);
 
     return $json_data_equipe;
 }
