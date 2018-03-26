@@ -1,5 +1,5 @@
 <?php
-require ('Test/TestListe.php');
+require ('test/TestListe.php');
 /**
  * Created by PhpStorm.
  * User: c16000805
@@ -8,7 +8,7 @@ require ('Test/TestListe.php');
  */
 
 function charger () {
-     $json_source = file_get_contents("/players.json"); //à mettre à jour quand le site sera en ligne
+     $json_source = file_get_contents("/home/a15020769/PhpstormProjects/miralis/players.json"); //à mettre à jour quand le site sera en ligne
      $json_data = json_decode($json_source, true);
      return $json_data;
 }
@@ -18,7 +18,7 @@ function compter ($json_data) {
     $cpt = 0;
 
     foreach ($json_data as $value) {
-        if(isset($value['playerID']) && isset($value))
+        if(isset($value['playerID']) & isset($value))
             $cpt += 1;
     }
     if ($cpt == 100)
