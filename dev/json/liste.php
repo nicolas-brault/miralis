@@ -8,7 +8,7 @@ require ('Test/TestListe.php');
  */
 
 function charger () {
-     $json_source = file_get_contents("/players.json");
+     $json_source = file_get_contents("/players.json"); //à mettre à jour quand le site sera en ligne
      $json_data = json_decode($json_source, true);
      return $json_data;
 }
@@ -25,4 +25,53 @@ function compter ($json_data) {
         return true;
     else
         return false;
+}
+
+function getVet ($json_data) {
+
+    $json_data_vet = [];
+
+    foreach ($json_data as $value) {
+        if ($value['HR'] >= 50)
+            $json_data_vet += $value;
+    }
+    return $json_data_vet;
+}
+
+function getNew ($json_data) {
+
+    $json_data_new = [];
+
+    foreach ($json_data as $value) {
+        if ($value['HR'] < 50)
+            $json_data_new += $value;
+    }
+    return $json_data_new;
+}
+
+function getRole ($json_data, $role) {
+
+    $json_data_role = [];
+
+    foreach ($json_data as $value) {
+        if ($value['role'] == $role)
+            $json_data_role += $value;
+    }
+    return $json_data_role;
+}
+
+function matchmaking($json_data) {
+    $json_data_vet = getVet($json_data);
+    $json_data_new = getNew($json_data);
+
+    $json_data_equipe = [];
+
+    $json_data_equipe += $json_data_vet[$rand = rand(0,sizeof($json_data_vet)-1)];
+    array_splice($json_data_vet, $rand, 1 );
+    $json_data_equipe += $json_data_vet[rand(0,sizeof($json_data_vet)-1)];
+    $json_data_equipe += $json_data_new[$rand = rand(0,sizeof($json_data_new)-1)];
+    array_splice($json_data_new, $rand, 1);
+    $json_data_equipe += $json_data_new[rand(0,sizeof($json_data_new)-1)];
+
+    return $json_data_equipe;
 }
