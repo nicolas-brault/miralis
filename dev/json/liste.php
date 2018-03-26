@@ -8,7 +8,7 @@ require ('Test/TestListe.php');
  */
 
 function charger () {
-     $json_source = file_get_contents("/dev/players.json");
+     $json_source = file_get_contents("/players.json");
      $json_data = json_decode($json_source, true);
      return $json_data;
 }
