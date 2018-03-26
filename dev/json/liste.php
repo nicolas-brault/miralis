@@ -8,7 +8,7 @@ require ('test/TestListe.php');
  */
 
 function charger () {
-     $json_source = file_get_contents("/players.json"); //à mettre à jour quand le site sera en ligne
+     $json_source = file_get_contents("/home/miralis/players.json");
      $json_data = json_decode($json_source, true);
      return $json_data;
 }
@@ -70,12 +70,12 @@ function matchmaking() {
     $randRole = rand(0,sizeof($json_data_compo)-1);
     $json_data_role = getRole($json_data_vet,$json_data_compo[$randRole]);
     $rand = rand(0,sizeof($json_data_role)-1);
-    array_splice($json_data_role, $rand, 1 );
     array_splice($json_data_compo, $randRole, 1 );
     array_push($json_data_equipe,$json_data_role[$rand]);
 
     $randRole = rand(0,sizeof($json_data_compo)-1);
     if ($json_data_compo[$randRole] == "DPS" && $json_data_compo[1] != "DPS") {
+        array_splice($json_data_role, $rand, 1 );
         $rand = rand(0,sizeof($json_data_role)-1);
         array_splice($json_data_role, $rand, 1 );
         array_splice($json_data_compo, $randRole, 1);
@@ -83,7 +83,6 @@ function matchmaking() {
     } else {
         $json_data_role = getRole($json_data_vet, $json_data_compo[$randRole]);
         $rand = rand(0, sizeof($json_data_role) - 1);
-        array_splice($json_data_role, $rand, 1 );
         array_splice($json_data_compo, $randRole, 1 );
         array_push($json_data_equipe, $json_data_role[$rand]);
     }
@@ -91,14 +90,13 @@ function matchmaking() {
     $randRole = rand(0,sizeof($json_data_compo)-1);
     $json_data_role = getRole($json_data_new,$json_data_compo[$randRole]);
     $rand = rand(0,sizeof($json_data_role)-1);
-    array_splice($json_data_role, $rand, 1 );
     array_splice($json_data_compo, $randRole, 1 );
     array_push($json_data_equipe,$json_data_role[$rand]);
 
     $randRole = rand(0,sizeof($json_data_compo)-1);
     if ($json_data_compo[$randRole] == "DPS" && $json_data_compo[1] != "DPS") {
-        $rand = rand(0, sizeof($json_data_role) - 1);
         array_splice($json_data_role, $rand, 1 );
+        $rand = rand(0, sizeof($json_data_role) - 1);
         array_splice($json_data_compo, $randRole, 1);
         array_push($json_data_equipe, $json_data_role[$rand]);
     } else {
