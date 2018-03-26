@@ -1,4 +1,5 @@
 <?php
+require ('Test/TestListe.php');
 /**
  * Created by PhpStorm.
  * User: c16000805
@@ -8,6 +9,20 @@
 
 function charger () {
      $json_source = file_get_contents("/dev/players.json");
-     return $json_source;
+     $json_data = json_decode($json_source, true);
+     return $json_data;
+}
 
+function compter ($json_data) {
+
+    $cpt = 0;
+
+    foreach ($json_data as $value) {
+        if(isset($value['playerID']) && isset($value))
+            $cpt += 1;
+    }
+    if ($cpt == 100)
+        return true;
+    else
+        return false;
 }
