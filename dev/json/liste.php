@@ -1,5 +1,5 @@
 <?php
-require ('test/TestListe.php');
+require ('Test/TestListe.php');
 /**
  * Created by PhpStorm.
  * User: c16000805
@@ -8,7 +8,7 @@ require ('test/TestListe.php');
  */
 
 function charger () {
-     $json_source = file_get_contents("/home/a15020769/PhpstormProjects/miralis/players.json"); //à mettre à jour quand le site sera en ligne
+     $json_source = file_get_contents("/players.json"); //à mettre à jour quand le site sera en ligne
      $json_data = json_decode($json_source, true);
      return $json_data;
 }
@@ -74,11 +74,11 @@ function matchmaking() {
     $rand = rand(0,sizeof($json_data_vet)-1);
     array_push($json_data_equipe,$json_data_vet[$rand]);
 
-    $rand = rand(0,sizeof($json_data_vet)-1);
+    $rand = rand(0,sizeof($json_data_new)-1);
     array_push($json_data_equipe, $json_data_new[$rand]);
     array_splice($json_data_new, $rand, 1);
 
-    $rand = rand(0,sizeof($json_data_vet)-1);
+    $rand = rand(0,sizeof($json_data_new)-1);
     array_push($json_data_equipe, $json_data_new[$rand]);
 
     return $json_data_equipe;
