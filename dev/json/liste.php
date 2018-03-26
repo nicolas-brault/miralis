@@ -77,11 +77,13 @@ function matchmaking() {
     $randRole = rand(0,sizeof($json_data_compo)-1);
     if ($json_data_compo[$randRole] == "DPS" && $json_data_compo[1] != "DPS") {
         $rand = rand(0,sizeof($json_data_role)-1);
+        array_splice($json_data_role, $rand, 1 );
         array_splice($json_data_compo, $randRole, 1);
         array_push($json_data_equipe, $json_data_role[$rand]);
     } else {
         $json_data_role = getRole($json_data_vet, $json_data_compo[$randRole]);
         $rand = rand(0, sizeof($json_data_role) - 1);
+        array_splice($json_data_role, $rand, 1 );
         array_splice($json_data_compo, $randRole, 1 );
         array_push($json_data_equipe, $json_data_role[$rand]);
     }
@@ -96,6 +98,7 @@ function matchmaking() {
     $randRole = rand(0,sizeof($json_data_compo)-1);
     if ($json_data_compo[$randRole] == "DPS" && $json_data_compo[1] != "DPS") {
         $rand = rand(0, sizeof($json_data_role) - 1);
+        array_splice($json_data_role, $rand, 1 );
         array_splice($json_data_compo, $randRole, 1);
         array_push($json_data_equipe, $json_data_role[$rand]);
     } else {
