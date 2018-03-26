@@ -63,15 +63,21 @@ function getRole ($json_data, $role) {
 function matchmaking($json_data) {
     $json_data_vet = getVet($json_data);
     $json_data_new = getNew($json_data);
-
     $json_data_equipe = [];
 
-    $json_data_equipe += $json_data_vet[$rand = rand(0,sizeof($json_data_vet)-1)];
+    $rand = rand(0,sizeof($json_data_vet)-1);
+    $json_data_equipe += $json_data_vet[$rand];
     array_splice($json_data_vet, $rand, 1 );
-    $json_data_equipe += $json_data_vet[rand(0,sizeof($json_data_vet)-1)];
-    $json_data_equipe += $json_data_new[$rand = rand(0,sizeof($json_data_new)-1)];
+
+    $rand = rand(0,sizeof($json_data_vet)-1);
+    $json_data_equipe += $json_data_vet[$rand];
+
+    $rand = rand(0,sizeof($json_data_vet)-1);
+    $json_data_equipe += $json_data_new[$rand];
     array_splice($json_data_new, $rand, 1);
-    $json_data_equipe += $json_data_new[rand(0,sizeof($json_data_new)-1)];
+
+    $rand = rand(0,sizeof($json_data_vet)-1);
+    $json_data_equipe += $json_data_new[$rand];
 
     return $json_data_equipe;
 }
