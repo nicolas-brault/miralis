@@ -60,7 +60,8 @@ function getRole ($json_data, $role) {
     return $json_data_role;
 }
 
-function matchmaking($json_data) {
+function matchmaking() {
+    $json_data = charger();
     $json_data_vet = getVet($json_data);
     $json_data_new = getNew($json_data);
     $json_data_equipe = [];
