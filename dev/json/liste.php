@@ -65,7 +65,7 @@ function matchmaking() {
     $json_data_vet = getVet($json_data);
     $json_data_new = getNew($json_data);
     $json_data_equipe = [];
-    print_r($json_data_new);
+    //print_r($json_data_new);
 
     $rand = rand(0,sizeof($json_data_vet)-1);
     array_push($json_data_equipe,$json_data_vet[$rand]);
@@ -78,7 +78,7 @@ function matchmaking() {
     array_push($json_data_equipe, $json_data_new[$rand]);
     array_splice($json_data_new, $rand, 1);
 
-    $rand = rand(0,sizeof($json_data_vet)-1);
+    $rand = rand(0,sizeof($json_data_new)-1);
     array_push($json_data_equipe, $json_data_new[$rand]);
 
     return $json_data_equipe;
