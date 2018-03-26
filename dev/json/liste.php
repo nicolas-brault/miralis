@@ -33,7 +33,7 @@ function getVet ($json_data) {
 
     foreach ($json_data as $value) {
         if ($value['HR'] >= 50)
-            $json_data_vet += $value;
+            array_push($json_data_vet, $value);
     }
     return $json_data_vet;
 }
@@ -44,7 +44,7 @@ function getNew ($json_data) {
 
     foreach ($json_data as $value) {
         if ($value['HR'] < 50)
-            $json_data_new += $value;
+            array_push($json_data_new, $value);
     }
     return $json_data_new;
 }
@@ -55,7 +55,7 @@ function getRole ($json_data, $role) {
 
     foreach ($json_data as $value) {
         if ($value['role'] == $role)
-            $json_data_role += $value;
+            array_push($json_data_role, $value);
     }
     return $json_data_role;
 }
