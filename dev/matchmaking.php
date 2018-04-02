@@ -10,11 +10,38 @@ require ("json/liste.php");
 
 $tableau= matchmaking();
 ?>
+<head>
+    <meta charset="UTF-8">
+    <title>miralis</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-<h1>Voici ton équipe</h1>
+<div id="titre">
+    <h1>Liste des équipes</h1>
+</div>
 
-<table border="1px">
+<div id="cssmenu">
+    <ul>
+        <li class="active">
+            <a href="index.html" data-title="Acceuil" >
+                Acceuil
+            </a>
+        </li>
+        <li>
+            <a href="afficherJoueur.php" data-title="afficher liste Joueurs">
+            afficher liste Joueurs
+            </a>
+        </li>
+        <li>
+            <a href="matchmaking.php" data-title="à toi de jouer">
+                à toi de jouer
+            </a>
+        </li>
+    </ul>
+</div>
 
+<div id="table">
+<table align="center">
     <tr>
         <th>Pseudo</th>
         <th>ID</th>
@@ -33,3 +60,4 @@ $tableau= matchmaking();
     <?php }?>
 
 </table>
+</div>

@@ -2,16 +2,34 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>test</title>$
-    <link href="/home/miralis/css/style.css" rel="stylesheet">
+    <title>miralis</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <p>bonjour</p>
-    <form id='test' action="afficherJoueur.php" method="post">
-        <button name="test2" id="test2">afficher liste Joueurs</button>
-    </form>
-    <form id="matchmaking" action="matchmaking.php" method="post">
-        <button name="matchmaking2" id="matchmaking2">à toi de jouer !</button>
-    </form>
+    <div id="titre">
+        <h1>Miralis</h1>
+    </div>
+    
+    <div id="cssmenu">
+    <ul>
+        <li class="active">
+            <a href="index.html" data-title="Acceuil" >
+                Acceuil
+            </a>
+        </li>
+        <li>
+            <a href="afficherJoueur.php" data-title="afficher liste Joueurs">
+            afficher liste Joueurs
+            </a>
+        </li>
+        <li>
+            <a href="matchmaking.php" data-title="à toi de jouer">
+                à toi de jouer
+            </a>
+        </li>
+    </ul>
+</div>
+
 </body>
 </html>

@@ -9,8 +9,37 @@ require ("json/liste.php");
 
 $tableau= charger();
 ?>
-<table border="1px">
+<head>
+    <meta charset="UTF-8">
+    <title>miralis</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<div id="titre">
+    <h1>Liste des joueurs</h1>
+</div>
 
+<div id="cssmenu">
+    <ul>
+        <li class="active">
+            <a href="index.html" data-title="Acceuil" >
+                Acceuil
+            </a>
+        </li>
+        <li>
+            <a href="afficherJoueur.php" data-title="afficher liste Joueurs">
+            afficher liste Joueurs
+            </a>
+        </li>
+        <li>
+            <a href="matchmaking.php" data-title="à toi de jouer">
+                à toi de jouer
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div id="table">
+<table align="center">
     <tr>
         <th>Pseudo</th>
         <th>ID</th>
@@ -29,3 +58,4 @@ $tableau= charger();
     <?php }?>
 
 </table>
+</div>
