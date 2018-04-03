@@ -8,7 +8,7 @@ require ('test/TestListe.php');
  */
 
 function charger () {
-     $json_source = file_get_contents("/home/miralis/players.json");
+     $json_source = file_get_contents("/home/k3vin-colombani/www/players.json");
      $json_data = json_decode($json_source, true);
      return $json_data;
 }
@@ -61,48 +61,76 @@ function getRole ($json_data, $role) {
 }
 
 function matchmaking() {
-    $json_data_compo = ["DPS", "DPS", "Healer", "Tank"];
     $json_data = charger();
     $json_data_vet = getVet($json_data);
     $json_data_new = getNew($json_data);
-    $json_data_equipe = [];
 
-    $randRole = rand(0,sizeof($json_data_compo)-1);
-    $json_data_role = getRole($json_data_vet,$json_data_compo[$randRole]);
-    $rand = rand(0,sizeof($json_data_role)-1);
-    array_splice($json_data_compo, $randRole, 1 );
-    array_push($json_data_equipe,$json_data_role[$rand]);
+    $json_DPS_Vet = getRole($json_data_vet,"DPS");
+    $json_Healer_Vet = getRole($json_data_vet,"Healer");
+    $json_Tank_Vet = getRole($json_data_vet,"Tank");
 
-    $randRole = rand(0,sizeof($json_data_compo)-1);
-    if ($json_data_compo[$randRole] == "DPS" && $json_data_compo[1] != "DPS") {
-        array_splice($json_data_role, $rand, 1 );
-        $rand = rand(0,sizeof($json_data_role)-1);
-        array_splice($json_data_role, $rand, 1 );
-        array_splice($json_data_compo, $randRole, 1);
-        array_push($json_data_equipe, $json_data_role[$rand]);
-    } else {
-        $json_data_role = getRole($json_data_vet, $json_data_compo[$randRole]);
-        $rand = rand(0, sizeof($json_data_role) - 1);
-        array_splice($json_data_compo, $randRole, 1 );
-        array_push($json_data_equipe, $json_data_role[$rand]);
+    $json_DPS_New = getRole($json_data_new,"DPS");
+    $json_Healer_New = getRole($json_data_new,"Healer");
+    $json_Tank_New = getRole($json_data_new,"Tank");
+
+
+    $rPlayerType = True;
+
+    for ($i=0; $i < 25; $i++) {
+        $json_data_compo = ["DPS", "DPS", "Healer", "Tank"];
+        $json_data_equipe = [];
+        while (sizeof($json_data_equipe) < 4) {
+            if ($rPlayerType) {
+
+                $rRole = rand(0,sizeof($json_data_compo)-1);
+
+                switch ($json_data_compo[$rRole]) {
+                    case "DPS":
+                        $rPlayer = rand(0,sizeof($json_DPS_Vet)-1);
+                        array_push($json_data_equipe, $json_DPS_Vet[$rPlayer]);
+                        array_splice($json_DPS_Vet, $rPlayer, 1 );
+                        break;
+                    case "Healer":
+                        $rPlayer = rand(0,sizeof($json_Healer_Vet)-1);
+                        array_push($json_data_equipe, $json_Healer_Vet[$rPlayer]);
+                        array_splice($json_Healer_Vet, $rPlayer, 1 );
+                        break;
+                    case "Tank":
+                        $rPlayer = rand(0,sizeof($json_Tank_Vet)-1);
+                        array_push($json_data_equipe, $json_Tank_Vet[$rPlayer]);
+                        array_splice($json_Tank_Vet, $rPlayer, 1 );
+                        break;
+                }
+                array_splice($json_data_compo, $rRole, 1);
+                $rPlayerType = !$rPlayerType;
+
+            } else {
+
+                $rRole = rand(0,sizeof($json_data_compo)-1);
+
+                switch ($json_data_compo[$rRole]) {
+                    case "DPS":
+                        $rPlayer = rand(0,sizeof($json_DPS_New)-1);
+                        array_push($json_data_equipe, $json_DPS_New[$rPlayer]);
+                        array_splice($json_DPS_New, $rPlayer, 1 );
+                        break;
+                    case "Healer":
+                        $rPlayer = rand(0,sizeof($json_Healer_New)-1);
+                        array_push($json_data_equipe, $json_Healer_New[$rPlayer]);
+                        array_splice($json_Healer_New, $rPlayer, 1 );
+                        break;
+                    case "Tank":
+                        $rPlayer = rand(0,sizeof($json_Tank_New)-1);
+                        array_push($json_data_equipe, $json_Tank_New[$rPlayer]);
+                        array_splice($json_Tank_New, $rPlayer, 1 );
+                        break;
+                }
+                array_splice($json_data_compo, $rRole, 1);
+                $rPlayerType = !$rPlayerType;
+            }
+        }
+        $json_data_equipeS[$i] = $json_data_equipe;
     }
-
-    $randRole = rand(0,sizeof($json_data_compo)-1);
-    $json_data_role = getRole($json_data_new,$json_data_compo[$randRole]);
-    $rand = rand(0,sizeof($json_data_role)-1);
-    array_splice($json_data_compo, $randRole, 1 );
-    array_push($json_data_equipe,$json_data_role[$rand]);
-
-    $randRole = rand(0,sizeof($json_data_compo)-1);
-    if ($json_data_compo[$randRole] == "DPS" && $json_data_compo[1] != "DPS") {
-        array_splice($json_data_role, $rand, 1 );
-        $rand = rand(0, sizeof($json_data_role) - 1);
-        array_splice($json_data_compo, $randRole, 1);
-        array_push($json_data_equipe, $json_data_role[$rand]);
-    } else {
-        $json_data_role = getRole($json_data_new, $json_data_compo[$randRole]);
-        $rand = rand(0, sizeof($json_data_role) - 1);
-        array_push($json_data_equipe, $json_data_role[$rand]);
-    }
-    return $json_data_equipe;
+    print_r($json_data_equipeS);
+    return $json_data_equipeS;
 }
