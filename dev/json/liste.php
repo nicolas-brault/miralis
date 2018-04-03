@@ -8,7 +8,7 @@ require ('test/TestListe.php');
  */
 
 function charger () {
-     $json_source = file_get_contents("/home/miralis/players.json");
+     $json_source = file_get_contents("/home/k3vin-colombani/www/players.json");
      $json_data = json_decode($json_source, true);
      return $json_data;
 }
@@ -101,8 +101,7 @@ function matchmaking() {
                         array_splice($json_Tank_Vet, $rPlayer, 1 );
                         break;
                 }
-                if (count($json_DPS_Vet) == 0 || count($json_Healer_Vet) == 0 || count($json_Tank_Vet) == 0)
-                    array_splice($json_data_compo, $rRole, 1);
+                array_splice($json_data_compo, $rRole, 1);
                 $rPlayerType = !$rPlayerType;
 
             } else {
@@ -126,8 +125,7 @@ function matchmaking() {
                         array_splice($json_Tank_New, $rPlayer, 1 );
                         break;
                 }
-                if (count($json_DPS_New) == 0 || count($json_Healer_New) == 0 || count($json_Tank_New) == 0)
-                    array_splice($json_data_compo, $rRole, 1);
+                array_splice($json_data_compo, $rRole, 1);
                 $rPlayerType = !$rPlayerType;
             }
         }
