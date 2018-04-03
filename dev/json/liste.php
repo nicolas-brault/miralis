@@ -101,7 +101,8 @@ function matchmaking() {
                         array_splice($json_Tank_Vet, $rPlayer, 1 );
                         break;
                 }
-                array_splice($json_data_compo, $rRole, 1);
+                if ($json_DPS_Vet.size() == 0 || $json_Healer_Vet.size() == 0 || $json_Tank_Vet.size() == 0)
+                    array_splice($json_data_compo, $rRole, 1);
                 $rPlayerType = !$rPlayerType;
 
             } else {
@@ -125,7 +126,8 @@ function matchmaking() {
                         array_splice($json_Tank_New, $rPlayer, 1 );
                         break;
                 }
-                array_splice($json_data_compo, $rRole, 1);
+                if ($json_DPS_New.size() == 0 || $json_Healer_New.size() == 0 || $json_Tank_New.size() == 0)
+                    array_splice($json_data_compo, $rRole, 1);
                 $rPlayerType = !$rPlayerType;
             }
         }
