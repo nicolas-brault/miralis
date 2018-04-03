@@ -50,14 +50,16 @@ $tableau= matchmaking();
     </tr>
 
     <?php
-    foreach($tableau as $ligne) {?>
-        <tr>
-            <td> <?php echo $ligne["playerID"] ; ?> </td>
-            <td> <?php echo $ligne["id"] ; ?> </td>
-            <td> <?php echo $ligne["HR"] ; ?> </td>
-            <td> <?php echo $ligne["role"] ; ?> </td>
-        </tr>
-    <?php }?>
+    for ($i=0; $i < 25; $i++) {
+        foreach($tableau[i] as $ligne) {?>
+            <tr>
+                <td> <?php echo $ligne["playerID"] ; ?> </td>
+                <td> <?php echo $ligne["id"] ; ?> </td>
+                <td> <?php echo $ligne["HR"] ; ?> </td>
+                <td> <?php echo $ligne["role"] ; ?> </td>
+            </tr>
+        <?php }}?>
+
 
 </table>
 </div>
