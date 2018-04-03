@@ -8,7 +8,7 @@ require ('test/TestListe.php');
  */
 
 function charger () {
-     $json_source = file_get_contents("/home/k3vin-colombani/www/players.json");
+     $json_source = file_get_contents("/home/miralis/players.json");
      $json_data = json_decode($json_source, true);
      return $json_data;
 }
