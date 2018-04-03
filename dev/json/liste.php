@@ -131,6 +131,5 @@ function matchmaking() {
         }
         $json_data_equipeS[$i] = $json_data_equipe;
     }
-    print_r($json_data_equipeS);
     return $json_data_equipeS;
 }
